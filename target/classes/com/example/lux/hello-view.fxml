@@ -20,5 +20,15 @@
             <Image url="@../../../assets/imgs/img_1.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="chip" fitHeight="57.0" fitWidth="48.0" layoutX="451.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/imgs/Chip.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="50.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/imgs/easterEgg.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

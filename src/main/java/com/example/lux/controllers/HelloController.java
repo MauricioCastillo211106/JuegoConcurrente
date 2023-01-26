@@ -1,4 +1,5 @@
 package com.example.lux.controllers;
+import com.example.lux.models.GeneralObstaculo;
 import com.example.lux.models.personaje;
 import com.example.lux.models.MoveSylas;
 import javafx.fxml.FXML;
@@ -30,6 +31,15 @@ public class HelloController implements Observer {
 
     private MoveSylas moveSylas;
 
+    //Imagenes de los obstaculos
+    private ImageView reyPinguino;
+    private ImageView demonioPinguino;
+    private ImageView rayos;
+
+    private GeneralObstaculo moverObstaculo;
+    private GeneralObstaculo [] cantidadObstaculos = new    GeneralObstaculo[2];
+
+
     @FXML
     void btnLeftOnMouse(MouseEvent event) {
         moveSylas.setLeftChange();
@@ -38,6 +48,21 @@ public class HelloController implements Observer {
 
     @FXML
     void btnPrepararOnMouse(MouseEvent event) {
+        //Genera los obstaculos
+/*        moverObstaculo = new GeneralObstaculo();
+        moverObstaculo.setRayo(new GeneralObstaculo(1, 0, 0));
+        moverObstaculo.addObserver(this);
+        Thread hilo1 = new Thread(moveSylas);
+        hilo1.start();
+
+        //movimiento de obstaculos
+        cantidadObstaculos[0] = new GeneralObstaculo();
+        cantidadObstaculos[0].setRayo(new GeneralObstaculo(2,0,0));
+        cantidadObstaculos[0].addObserver(this);
+        Thread hilo3 = new Thread(cantidadObstaculos[0]);
+        hilo3.start();*/
+
+        //genera a sylas
         moveSylas = new MoveSylas();
         moveSylas.setPos(new personaje(1, 319, 297));
         moveSylas.addObserver(this);

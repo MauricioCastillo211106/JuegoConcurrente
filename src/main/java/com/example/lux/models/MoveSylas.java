@@ -23,11 +23,11 @@ public class MoveSylas extends Observable implements Runnable {
         this.right = right;
     }
 
-    public void setRightChange(){
-        this.right=right;
-    }
-    public void setLeftChange(){
-        this.left=left;
+    public void setRightChange(){pos.setX(pos.getX() + 0);}
+    public void setLeftChange(){pos.setX(pos.getX() + 0);}
+
+    public  MoveSylas(){
+        status= true;
     }
 
     @Override
@@ -41,17 +41,14 @@ public class MoveSylas extends Observable implements Runnable {
                 throw new RuntimeException(e);
             }
             if(left == true){
-                if(pos.getX() <= 290){
-                    pos.setX(pos.getX() + 10);
-                    System.out.println("Derecha");
-
+                if(pos.getX() >= 0){
+                    pos.setX(pos.getX() - 10);
                 }
                 left = false;
             }
             else if (right == true){
-                if (pos.getX() >= 0){
-                    pos.setX(pos.getX() - 10);
-                    System.out.println("Izquierda");
+                if (pos.getX() <= 640){
+                    pos.setX(pos.getX() + 10);
                 }
                 right=false;
             }

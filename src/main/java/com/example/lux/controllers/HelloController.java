@@ -57,7 +57,6 @@ public class HelloController implements Observer {
         if (o instanceof MoveSylas) {
             personaje positionPersonage = (personaje) arg;
             sylas.setLayoutX(positionPersonage.getX());
-            System.out.println("a");
         }
     }
 }

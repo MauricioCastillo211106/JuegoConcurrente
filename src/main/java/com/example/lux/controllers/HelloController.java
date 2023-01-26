@@ -34,17 +34,15 @@ public class HelloController implements Observer {
     void btnLeftOnMouse(MouseEvent event) {
         moveSylas.setLeftChange();
         moveSylas.setLeft(true);
-        System.out.println("si paso");
     }
 
     @FXML
     void btnPrepararOnMouse(MouseEvent event) {
-        moveSylas =  new MoveSylas();
-        moveSylas.setPos(new personaje(1,319,297));
+        moveSylas = new MoveSylas();
+        moveSylas.setPos(new personaje(1, 319, 297));
         moveSylas.addObserver(this);
         Thread hilo1 = new Thread(moveSylas);
         hilo1.start();
-        System.out.println("paso aqui 2");
     }
 
     @FXML
@@ -56,10 +54,10 @@ public class HelloController implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (o instanceof MoveSylas){
+        if (o instanceof MoveSylas) {
             personaje positionPersonage = (personaje) arg;
             sylas.setLayoutX(positionPersonage.getX());
             System.out.println("a");
         }
     }
-
+}

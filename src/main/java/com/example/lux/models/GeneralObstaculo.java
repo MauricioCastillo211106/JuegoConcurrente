@@ -14,7 +14,7 @@ public class GeneralObstaculo extends Observable implements Runnable{
     public void setRayo(Obstaculo rayo){
         this.rayo= rayo;
     }
-    public void creaRayo(){
+    public GeneralObstaculo(){
         status= true;
     }
     int numero = (int)(Math.random()*640+1);
@@ -26,16 +26,20 @@ public class GeneralObstaculo extends Observable implements Runnable{
     @Override
     public void run() {
         rayo.setX(numero);
+
         while (status){
+
             rayo.setY((rayo.getY() + 4));
             setChanged();
             notifyObservers(rayo);
+
             try {
                 Thread.sleep(50l);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            if (rayo.getY() >=400){
+            System.out.println("ptm");
+            if (rayo.getY() >=200){
                 numero = (int)(Math.random()*640+1);
                 rayo.setY(0);
                 rayo.setX(numero);

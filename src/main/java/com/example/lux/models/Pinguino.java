@@ -1,11 +1,11 @@
 package com.example.lux.models;
 
-public class Obstaculo {
+public class Pinguino {
     private int id;
     private int x;
     private int y;
 
-    public Obstaculo(int id, int x, int y) {
+    public Pinguino(int id, int x, int y) {
         this.id = id;
         this.x = x;
         this.y = y;

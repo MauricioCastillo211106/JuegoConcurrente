@@ -1,8 +1,6 @@
 package com.example.lux.controllers;
-import com.example.lux.models.GeneralObstaculo;
-import com.example.lux.models.Obstaculo;
-import com.example.lux.models.personaje;
-import com.example.lux.models.MoveSylas;
+import com.example.lux.models.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -33,7 +31,8 @@ public class HelloController implements Observer {
 
     private MoveSylas moveSylas;
 
-    private ImageView obstaculo1 ;
+    private ImageView obstaculo1,obstaculo2,obstaculo3 ;
+
 
     //Imagenes de los obstaculos
     private ImageView reyPinguino;
@@ -41,7 +40,8 @@ public class HelloController implements Observer {
     private ImageView rayos;
 
     private GeneralObstaculo moverObstaculo;
-    private GeneralObstaculo [] cantidadObstaculos = new    GeneralObstaculo[2];
+    private GeneralObstaculo [] cantidadObstaculos = new    GeneralObstaculo[1];
+    private GeneralPinguino [] cantidadPinguinos = new  GeneralPinguino[2];
 
 
     @FXML
@@ -53,19 +53,46 @@ public class HelloController implements Observer {
     @FXML
     void btnPrepararOnMouse(MouseEvent event) {
         //Creacion de la imagen de la comida
-        obstaculo1 = new ImageView(new Image(getClass().getResourceAsStream("/assets/imgs/Rayo.gif")));
-        obstaculo1.setFitHeight(200);
-        obstaculo1.setFitWidth(40);
-        obstaculo1.setLayoutX(0);
-        obstaculo1.setLayoutY(0);
-        rootScene.getChildren().addAll(obstaculo1);
+        rayos = new ImageView(new Image(getClass().getResourceAsStream("/assets/imgs/ObstaculoRayo.gif")));
+        rayos.setFitHeight(200);
+        rayos.setFitWidth(20);
+        rayos.setLayoutX(0);
+        rayos.setLayoutY(0);
+        rootScene.getChildren().addAll(rayos);
+
+        //Creacion de la imagen de la Pinguino
+        demonioPinguino = new ImageView(new Image(getClass().getResourceAsStream("/assets/imgs/ObstaculoPinguino.gif")));
+        demonioPinguino.setFitHeight(100);
+        demonioPinguino.setFitWidth(100);
+        demonioPinguino.setLayoutX(0);
+        demonioPinguino.setLayoutY(0);
+        rootScene.getChildren().addAll(demonioPinguino);
+
+        reyPinguino = new ImageView(new Image(getClass().getResourceAsStream("/assets/imgs/ObstaculoReyPinguino.gif")));
+        reyPinguino.setFitHeight(100);
+        reyPinguino.setFitWidth(100);
+        reyPinguino.setLayoutX(0);
+        reyPinguino.setLayoutY(0);
+        rootScene.getChildren().addAll(reyPinguino);
+
         //Genera los obstaculos
         cantidadObstaculos[0] = new GeneralObstaculo();
-        cantidadObstaculos[0].setRayo(new Obstaculo(1, 0, 0));
+        cantidadObstaculos[0].setRayo(new Obstacle(1, 0, 0));
         cantidadObstaculos[0].addObserver(this);
         Thread hilo2 = new Thread(cantidadObstaculos[0]);
         hilo2.start();
         System.out.println(Thread.currentThread().getName());
+
+        cantidadPinguinos[0] = new GeneralPinguino();
+        cantidadPinguinos[0].setPinguin(new Pinguino(1, 0, 0));
+        cantidadPinguinos[0].addObserver(this);
+        Thread hilo3 = new Thread(cantidadPinguinos[0]);
+        hilo3.start();
+        cantidadPinguinos[1] = new GeneralPinguino();
+        cantidadPinguinos[1].setPinguin(new Pinguino(2, 0, 0));
+        cantidadPinguinos[1].addObserver(this);
+        Thread hilo4 = new Thread(cantidadPinguinos[1]);
+        hilo4.start();
 
         //genera a sylas
         moveSylas = new MoveSylas();
@@ -73,8 +100,6 @@ public class HelloController implements Observer {
         moveSylas.addObserver(this);
         Thread hilo1 = new Thread(moveSylas);
         hilo1.start();
-
-
 
 
     }
@@ -90,16 +115,28 @@ public class HelloController implements Observer {
     public void update(Observable o, Object arg) {
         if (o instanceof MoveSylas) {
             personaje positionPersonage = (personaje) arg;
-            sylas.setLayoutX(positionPersonage.getX());
+            Platform.runLater(() -> sylas.setLayoutX(positionPersonage.getX()));
         }
         else if (o instanceof GeneralObstaculo){
-            Obstaculo obstaculoPos = (Obstaculo) arg;
-            switch (obstaculoPos.getId()){
+            Obstacle obstaculoPos = (Obstacle) arg;
+            Platform.runLater(() ->rayos.setLayoutY(obstaculoPos.getY()));
+            Platform.runLater(() ->rayos.setLayoutX((obstaculoPos.getX())));
+        }
+
+        if (o instanceof GeneralPinguino){
+            Pinguino obstaculoPinguino = (Pinguino) arg;
+
+            switch (obstaculoPinguino.getId()){
+
                 case 1:
-                    obstaculo1.setLayoutY(obstaculoPos.getY());
-                    obstaculo1.setLayoutX((obstaculoPos.getX()));
-                break;
-            }
+                    Platform.runLater(() ->demonioPinguino.setLayoutY(obstaculoPinguino.getY()));
+                    Platform.runLater(() ->demonioPinguino.setLayoutX((obstaculoPinguino.getX())));
+                    break;
+                case 2:
+                    System.out.println("rey pasando");
+                    Platform.runLater(() ->reyPinguino.setLayoutY(obstaculoPinguino.getY()));
+                    Platform.runLater(() ->reyPinguino.setLayoutX((obstaculoPinguino.getX())));
+                    break;
         }
     }
-}
+}}

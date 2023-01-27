@@ -1,4 +1,5 @@
 package com.example.lux.controllers;
+
 import com.example.lux.models.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -31,7 +32,7 @@ public class HelloController implements Observer {
 
     private MoveSylas moveSylas;
 
-    private ImageView obstaculo1,obstaculo2,obstaculo3 ;
+    private ImageView obstaculo1, obstaculo2, obstaculo3;
 
 
     //Imagenes de los obstaculos
@@ -40,8 +41,8 @@ public class HelloController implements Observer {
     private ImageView rayos;
 
     private GeneralObstaculo moverObstaculo;
-    private GeneralObstaculo [] cantidadObstaculos = new    GeneralObstaculo[1];
-    private GeneralPinguino [] cantidadPinguinos = new  GeneralPinguino[2];
+    private GeneralObstaculo[] cantidadObstaculos = new GeneralObstaculo[1];
+    private GeneralPinguino[] cantidadPinguinos = new GeneralPinguino[2];
 
 
     @FXML
@@ -116,27 +117,27 @@ public class HelloController implements Observer {
         if (o instanceof MoveSylas) {
             personaje positionPersonage = (personaje) arg;
             Platform.runLater(() -> sylas.setLayoutX(positionPersonage.getX()));
-        }
-        else if (o instanceof GeneralObstaculo){
+        } else if (o instanceof GeneralObstaculo) {
             Obstacle obstaculoPos = (Obstacle) arg;
-            Platform.runLater(() ->rayos.setLayoutY(obstaculoPos.getY()));
-            Platform.runLater(() ->rayos.setLayoutX((obstaculoPos.getX())));
+            Platform.runLater(() -> rayos.setLayoutY(obstaculoPos.getY()));
+            Platform.runLater(() -> rayos.setLayoutX((obstaculoPos.getX())));
         }
 
-        if (o instanceof GeneralPinguino){
+        if (o instanceof GeneralPinguino) {
             Pinguino obstaculoPinguino = (Pinguino) arg;
 
-            switch (obstaculoPinguino.getId()){
+            switch (obstaculoPinguino.getId()) {
 
                 case 1:
-                    Platform.runLater(() ->demonioPinguino.setLayoutY(obstaculoPinguino.getY()));
-                    Platform.runLater(() ->demonioPinguino.setLayoutX((obstaculoPinguino.getX())));
+                    Platform.runLater(() -> demonioPinguino.setLayoutY(obstaculoPinguino.getY()));
+                    Platform.runLater(() -> demonioPinguino.setLayoutX((obstaculoPinguino.getX())));
                     break;
                 case 2:
                     System.out.println("rey pasando");
-                    Platform.runLater(() ->reyPinguino.setLayoutY(obstaculoPinguino.getY()));
-                    Platform.runLater(() ->reyPinguino.setLayoutX((obstaculoPinguino.getX())));
+                    Platform.runLater(() -> reyPinguino.setLayoutY(obstaculoPinguino.getY()));
+                    Platform.runLater(() -> reyPinguino.setLayoutX((obstaculoPinguino.getX())));
                     break;
+            }
         }
     }
-}}
+}

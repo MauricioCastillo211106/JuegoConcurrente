@@ -133,11 +133,28 @@ public class HelloController implements Observer {
                     Platform.runLater(() -> demonioPinguino.setLayoutX((obstaculoPinguino.getX())));
                     break;
                 case 2:
-                    System.out.println("rey pasando");
                     Platform.runLater(() -> reyPinguino.setLayoutY(obstaculoPinguino.getY()));
                     Platform.runLater(() -> reyPinguino.setLayoutX((obstaculoPinguino.getX())));
                     break;
             }
+        }
+        if(rayos.getBoundsInParent().intersects(sylas.getBoundsInParent())){
+            moveSylas.setStatus(false);
+            cantidadObstaculos[0].setStatus(false);
+            cantidadPinguinos[0].setStatus(false);
+            cantidadPinguinos[1].setStatus(false);
+        }
+        if(reyPinguino.getBoundsInParent().intersects(sylas.getBoundsInParent())){
+            moveSylas.setStatus(false);
+            cantidadObstaculos[0].setStatus(false);
+            cantidadPinguinos[0].setStatus(false);
+            cantidadPinguinos[1].setStatus(false);
+        }
+        if(demonioPinguino.getBoundsInParent().intersects(sylas.getBoundsInParent())){
+            moveSylas.setStatus(false);
+            cantidadObstaculos[0].setStatus(false);
+            cantidadPinguinos[0].setStatus(false);
+            cantidadPinguinos[1].setStatus(false);
         }
     }
 }
